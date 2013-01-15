@@ -46,7 +46,6 @@ public class FlickrApiConnectionProvider {
 		try{
 		
 			URL url = new URL(requestUrl);
-			//System.out.println(url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			InputStream responseStream = conn.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream));

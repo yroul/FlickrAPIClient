@@ -22,8 +22,10 @@ public  class FlickrAPIClient {
 		FlickrApiConnectionProvider provider = new FlickrApiConnectionProvider(apiKey, "json");
 		Map<String,String> arguments = new HashMap<String,String>();
 		arguments.put("tags",keywords);
+		arguments.put("sort","relevance");
+		//return only 20 image 
+		arguments.put("per_page","20");
 		String response = provider.sendRequest("flickr.photos.search", arguments);
-		
 		response = response.substring(0, response.length()-1);
 		response = response.substring(9);
 		ObjectMapper mapper = new ObjectMapper();
@@ -43,6 +45,7 @@ public  class FlickrAPIClient {
 		Map<String,String> arguments = new HashMap<String,String>();
 		arguments.put("photo_id",photoId);
 		String response = provider.sendRequest("flickr.photos.getSizes", arguments);
+		
 		response = response.substring(8);
 		response = response.substring(0, response.length()-15);
 		JSONParser parser = new JSONParser();
@@ -55,9 +58,8 @@ public  class FlickrAPIClient {
 				if(obj.containsKey("label")){
 					if(obj.get("label").equals(imageSize)){
 						toReturn =  (String) obj.get("source");
-					}
-					else{
 						break;
+						
 					}
 						
 				}

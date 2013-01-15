@@ -14,6 +14,7 @@ public class PhotoSet {
 	private int perpage;
 	private String total;
 	private List<Photo> photo;
+	
 	public int getPage() {
 		return page;
 	}
