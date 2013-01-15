@@ -40,13 +40,14 @@ public class FlickrApiConnectionProvider {
 		   String key = (String) it.next();
 		   String value = args.get(key);
 		   
-		   requestUrl += "&"+key+"="+value;// TODO URL ENCODE 
+		   requestUrl += "&"+key+"="+value;
 		}
 		
 		try{
 		
 			URL url = new URL(requestUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			System.out.println(url.toString());
 			InputStream responseStream = conn.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream));
 			String text = reader.readLine();

@@ -68,6 +68,7 @@ public class MainWindow implements ActionListener,MouseListener  {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Flickr Explorer");
 		frame.setBounds(100, 100, 900, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -122,9 +123,10 @@ public class MainWindow implements ActionListener,MouseListener  {
 					mainPanel.add(imagePanel);
 				
 				}
+				northPanel.revalidate();
 				northPanel.repaint();
+				mainPanel.revalidate();
 				mainPanel.repaint();
-				mainPanel.validate();
 				
 			}
 			
@@ -148,6 +150,8 @@ public class MainWindow implements ActionListener,MouseListener  {
 			this.downloadButton = new DownLoadButton(target.getImageId());
 			downloadButton.addActionListener(this);
 			this.downLoadPanel.add(this.downloadButton);
+			downLoadPanel.revalidate();
+			downLoadPanel.repaint();
 			
 			
 		}

@@ -1,5 +1,6 @@
 package yroul.flickr;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -21,10 +22,12 @@ public  class FlickrAPIClient {
 	public static PhotoSet  searchPhotos(String keywords){
 		FlickrApiConnectionProvider provider = new FlickrApiConnectionProvider(apiKey, "json");
 		Map<String,String> arguments = new HashMap<String,String>();
+		keywords = keywords.replace(" ", ",");
+		keywords = URLEncoder.encode(keywords);
 		arguments.put("tags",keywords);
 		arguments.put("sort","relevance");
 		//return only 20 image 
-		arguments.put("per_page","20");
+		arguments.put("per_page","30");
 		String response = provider.sendRequest("flickr.photos.search", arguments);
 		response = response.substring(0, response.length()-1);
 		response = response.substring(9);
