@@ -1,8 +1,6 @@
 package yroul.flickr.view;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -13,10 +11,19 @@ import org.apache.commons.io.FileUtils;
 
 import yroul.flickr.FlickrAPIClient;
 
-
+/**
+ * 
+ * @author yroul
+ * Custom button for the download button
+ *
+ */
 public class DownLoadButton extends JButton {
 
 	private String imageId;
+	/**
+	 * Constructor
+	 * @param imageId the image id
+	 */
 	public DownLoadButton(String imageId) {
 		super();
 		this.setText("Download");
@@ -25,6 +32,9 @@ public class DownLoadButton extends JButton {
 		
 	}
 
+	/**
+	 * Open a JFileChooser dialog to define where to save the picture
+	 */
 	public void save(){
 		JFileChooser chooser = new JFileChooser();
 		chooser.setApproveButtonText("Save");

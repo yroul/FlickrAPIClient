@@ -5,23 +5,40 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 
+ * @author yroul
+ * 
+ * Core Provider for connection with FlickrAPI
+ *
+ */
 public class FlickrApiConnectionProvider {
 
 	private final String apiKey;
 	private final String format;
 	private final String flickrAPIURL;
 	
+	/**
+	 * 
+	 * @param apiKey your applciation key
+	 * @param format response format (only json allowed yet)
+	 * @param flickrAPIURL flickr api url
+	 */
 	public FlickrApiConnectionProvider(String apiKey, String format,String flickrAPIURL) {
 		super();
 		this.apiKey = apiKey;
 		this.format = format;
 		this.flickrAPIURL = flickrAPIURL;
 	}
+	/**
+	 * 
+	 * @param apiKey applciation key
+	 * @param format response format (only json allowed yet)
+	 */
 	public FlickrApiConnectionProvider(String apiKey, String format) {
 		super();
 		this.apiKey = apiKey;
@@ -29,13 +46,19 @@ public class FlickrApiConnectionProvider {
 		this.flickrAPIURL = "http://api.flickr.com/services/rest/";
 	}
 	
+	/**
+	 * 
+	 * @param methodName flickr's api method to request
+	 * @param args arguments to send with the request
+	 * @return response string
+	 */
 	public String sendRequest(String methodName,Map<String,String> args){
 		String requestUrl = flickrAPIURL+"?method="+methodName+"&api_key="+apiKey;
 		//only with json yet
 		requestUrl += "&format=json";
 		
-		Set keys = args.keySet();
-		Iterator it = keys.iterator();
+		Set<String> keys = args.keySet();
+		Iterator<String> it = keys.iterator();
 		while (it.hasNext()){
 		   String key = (String) it.next();
 		   String value = args.get(key);
@@ -47,7 +70,6 @@ public class FlickrApiConnectionProvider {
 		
 			URL url = new URL(requestUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			System.out.println(url.toString());
 			InputStream responseStream = conn.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(responseStream));
 			String text = reader.readLine();

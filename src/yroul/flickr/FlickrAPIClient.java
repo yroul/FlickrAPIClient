@@ -1,32 +1,40 @@
 package yroul.flickr;
 
-import java.net.URLEncoder;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import yroul.flickr.model.PhotoSet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-import javax.json.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+/**
+ * 
+ * @author yroul
+ *
+ *	Application core
+ *	Here is all the functions the application needs
+ */
 public  class FlickrAPIClient {
 
 	private static String apiKey = "de7a49a6d554b0e216dfcf2976635605";
 	
+	/**
+	 *  Search photos by keywords
+	 * @param keywords keywords to request
+	 * @return photoset
+	 */
 	public static PhotoSet  searchPhotos(String keywords){
 		FlickrApiConnectionProvider provider = new FlickrApiConnectionProvider(apiKey, "json");
 		Map<String,String> arguments = new HashMap<String,String>();
 		keywords = keywords.replace(" ", ",");
-		keywords = URLEncoder.encode(keywords);
 		arguments.put("tags",keywords);
 		arguments.put("sort","relevance");
-		//return only 20 image 
+		//return only 30 image 
 		arguments.put("per_page","30");
 		String response = provider.sendRequest("flickr.photos.search", arguments);
 		response = response.substring(0, response.length()-1);
@@ -43,6 +51,12 @@ public  class FlickrAPIClient {
 		}
 	}
 	
+	/**
+	 * Return the url of a picture
+	 * @param imageSize Image size (can be Large,Thumbnail,Original,Square,...) see Flickr API documentation
+	 * @param photoId photo id you want the url
+	 * @return the pciture url
+	 */
 	public static String getImageURL(String imageSize,String photoId){
 		FlickrApiConnectionProvider provider = new FlickrApiConnectionProvider(apiKey, "json");
 		Map<String,String> arguments = new HashMap<String,String>();

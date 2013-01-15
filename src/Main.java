@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 import yroul.flickr.FlickrAPIClient;
 import yroul.flickr.model.PhotoSet;
-import yroul.flickr.view.ImagePanel;
+import yroul.flickr.view.ImageLabel;
 
 public class Main {
 

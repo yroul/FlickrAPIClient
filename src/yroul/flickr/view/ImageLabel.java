@@ -11,17 +11,22 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
-public class ImagePanel extends JLabel implements ActionListener {
+/**
+ * 
+ * @author yroul
+ *
+ * Custom label for image displaying
+ */
+public class ImageLabel extends JLabel implements ActionListener {
 
 	private BufferedImage image = null;
 	private String imageId;
 	
 	/**
      * Constructeur
-     * @param file nom du fichier
+     * @param file filename
      */
-    public ImagePanel(String fileURL,String id) {
+    public ImageLabel(String fileURL,String id) {
     	try {                
             image = ImageIO.read(new URL(fileURL));
             this.setIcon(new ImageIcon(image));
@@ -38,6 +43,10 @@ public class ImagePanel extends JLabel implements ActionListener {
 		}
 		
 	}
+	/**
+	 * 
+	 * @return the image's flick API ID
+	 */
 	public String getImageId(){
 		return this.imageId;
 	}

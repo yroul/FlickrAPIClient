@@ -4,30 +4,31 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Image;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.plaf.SliderUI;
 
 import yroul.flickr.FlickrAPIClient;
 import yroul.flickr.model.Photo;
 import yroul.flickr.model.PhotoSet;
-
+/**
+ * 
+ * @author yroul
+ * 
+ * Main window of the applciation
+ *
+ */
 public class MainWindow implements ActionListener,MouseListener  {
 
 	private JFrame frame;
@@ -110,40 +111,27 @@ public class MainWindow implements ActionListener,MouseListener  {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// btnSearch on click
+		
+		//button search click
 		if(e.getSource().equals(btnSearch)){
-			String keywords = txtSearch.getText();
-			if(!(keywords.isEmpty())){
-				//remove old images
-				mainPanel.removeAll();
-				PhotoSet photoSet = FlickrAPIClient.searchPhotos(keywords);
-				for(Photo p : photoSet.getPhoto()){
-					ImagePanel imagePanel = new ImagePanel(FlickrAPIClient.getImageURL("Square",p.getId()),p.getId());
-					imagePanel.addMouseListener(this);
-					mainPanel.add(imagePanel);
-				
-				}
-				northPanel.revalidate();
-				northPanel.repaint();
-				mainPanel.revalidate();
-				mainPanel.repaint();
-				
-			}
-			
+			search();
 		}
+		//button download click
 		if(e.getSource() == downloadButton){
-			downloadButton.save();
+			save();
 		}
+			
+			
 		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() instanceof ImagePanel){
-			ImagePanel target = (ImagePanel)e.getSource();
+		if (e.getSource() instanceof ImageLabel){
+			ImageLabel target = (ImageLabel)e.getSource();
 			this.picturePanel.removeAll();
 			this.downLoadPanel.removeAll();
-			ImagePanel picture = new ImagePanel(FlickrAPIClient.getImageURL("Medium",target.getImageId()),target.getImageId());
+			ImageLabel picture = new ImageLabel(FlickrAPIClient.getImageURL("Medium",target.getImageId()),target.getImageId());
 			this.picturePanel.add(picture);
 			this.picturePanel.repaint();
 			this.picturePanel.validate();
@@ -157,7 +145,36 @@ public class MainWindow implements ActionListener,MouseListener  {
 		}
 		
 	}
-
+	/**
+	 * Start search in flickr api
+	 */
+	private void search(){
+		
+		String keywords = this.txtSearch.getText();
+		if(!(keywords.isEmpty())){
+			//remove old images
+			mainPanel.removeAll();
+			PhotoSet photoSet = FlickrAPIClient.searchPhotos(keywords);
+			for(Photo p : photoSet.getPhoto()){
+				ImageLabel imagePanel = new ImageLabel(FlickrAPIClient.getImageURL("Square",p.getId()),p.getId());
+				imagePanel.addMouseListener(this);
+				mainPanel.add(imagePanel);
+			
+			}
+			northPanel.revalidate();
+			northPanel.repaint();
+			mainPanel.revalidate();
+			mainPanel.repaint();
+			
+		}
+		
+	}
+	/**
+	 * Save image
+	 */
+	private void save(){
+		downloadButton.save();
+	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
