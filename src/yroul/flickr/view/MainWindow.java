@@ -47,6 +47,28 @@ public class MainWindow implements ActionListener,MouseListener  {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				/**
+				 * 
+				 *  TRY THIS FOR BETTER GUI
+				 * 
+				 * 
+				 * 
+				 *
+				 try {
+				 	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				 } 
+				catch (UnsupportedLookAndFeelException e) {
+				// handle exception
+				}
+				catch (ClassNotFoundException e) {
+				// handle exception
+				}
+				catch (InstantiationException e) {
+				// handle exception
+				}
+				catch (IllegalAccessException e) {
+				// handle exception
+				}*/
 				try {
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);
