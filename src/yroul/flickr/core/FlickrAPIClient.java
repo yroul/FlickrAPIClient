@@ -55,7 +55,7 @@ public  class FlickrAPIClient {
 	 * Return the url of a picture
 	 * @param imageSize Image size (can be Large,Thumbnail,Original,Square,...) see Flickr API documentation
 	 * @param photoId photo id you want the url
-	 * @return the pciture url
+	 * @return the picture url
 	 */
 	public static String getImageURL(String imageSize,String photoId){
 		FlickrApiConnectionProvider provider = new FlickrApiConnectionProvider(apiKey, "json");
@@ -82,14 +82,11 @@ public  class FlickrAPIClient {
 				}
 				
 			}
-			if (toReturn == null)
+			if (toReturn == null){
 				throw new IllegalArgumentException("Sorry, the size "+imageSize+" does not exist.");
-			
-			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-			toReturn = e.toString();
 		}
 		return toReturn;
 		

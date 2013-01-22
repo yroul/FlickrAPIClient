@@ -9,6 +9,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,11 +20,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.plaf.SliderUI;
 
 import yroul.flickr.core.FlickrAPIClient;
 import yroul.flickr.model.Photo;
 import yroul.flickr.model.PhotoSet;
+import yroul.flickr.view.button.DownLoadButton;
+import yroul.flickr.view.label.CustomLabel;
 /**
  * 
  * @author yroul
@@ -90,13 +92,17 @@ public class MainWindow implements ActionListener,MouseListener  {
 		frame.setBounds(100, 100, 900, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("images/flickr_logo.png")));
 		
 		northPanel = new JPanel();
 		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblSearch = new JLabel("Search");
+		JLabel lblSearch = new JLabel("Search in ");
 		northPanel.add(lblSearch);
+		
+		CustomLabel flickrLogo = new CustomLabel("flickr_logo.png");
+		northPanel.add(flickrLogo);
 		
 		txtSearch = new JTextField();
 		northPanel.add(txtSearch);

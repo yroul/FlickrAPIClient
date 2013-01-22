@@ -1,4 +1,4 @@
-package yroul.flickr.view;
+package yroul.flickr.view.button;
 
 import java.io.File;
 import java.net.URL;
@@ -17,7 +17,7 @@ import yroul.flickr.core.FlickrAPIClient;
  * Custom button for the download button
  *
  */
-public class DownLoadButton extends JButton {
+public class DownLoadButton extends AbstractCustomButton {
 
 	private String imageId;
 	/**
@@ -25,11 +25,8 @@ public class DownLoadButton extends JButton {
 	 * @param imageId the image id
 	 */
 	public DownLoadButton(String imageId) {
-		super();
-		this.setText("Download");
-		this.imageId = imageId;
-		this.setIcon(new ImageIcon(this.getClass().getResource("download.png")));
-		
+		super("download.png","Download");
+		this.imageId = imageId;		
 	}
 
 	/**
