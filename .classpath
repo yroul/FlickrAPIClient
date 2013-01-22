@@ -2,12 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/Win_Seven_Pro64-SP1/Downloads/google-oauth-client-1.13.1-beta.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Win_Seven_Pro64-SP1/Downloads/jackson-annotations-2.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Win_Seven_Pro64-SP1/Downloads/jackson-core-2.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Win_Seven_Pro64-SP1/Downloads/jackson-databind-2.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Win_Seven_Pro64-SP1/Downloads/javax.json-api-EDR-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Win_Seven_Pro64-SP1/Downloads/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Win_Seven_Pro64-SP1/workspace/FlickrClient/lib/commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Yroullard/workspace/FlickrAPIClient/lib/jackson-annotations-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Yroullard/workspace/FlickrAPIClient/lib/jackson-core-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Yroullard/workspace/FlickrAPIClient/lib/jackson-databind-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Yroullard/workspace/FlickrAPIClient/lib/javax.json-api-EDR-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Yroullard/workspace/FlickrAPIClient/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Yroullard/workspace/FlickrAPIClient/lib/commons-io-2.4/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

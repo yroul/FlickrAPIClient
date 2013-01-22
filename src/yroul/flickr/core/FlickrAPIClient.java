@@ -1,4 +1,4 @@
-package yroul.flickr;
+package yroul.flickr.core;
 
 
 import java.util.HashMap;

@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -19,7 +21,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.plaf.SliderUI;
 
-import yroul.flickr.FlickrAPIClient;
+import yroul.flickr.core.FlickrAPIClient;
 import yroul.flickr.model.Photo;
 import yroul.flickr.model.PhotoSet;
 /**
@@ -47,28 +49,21 @@ public class MainWindow implements ActionListener,MouseListener  {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				/**
-				 * 
-				 *  TRY THIS FOR BETTER GUI
-				 * 
-				 * 
-				 * 
-				 *
-				 try {
-				 	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				 } 
+				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				}
 				catch (UnsupportedLookAndFeelException e) {
-				// handle exception
+					e.printStackTrace();
 				}
 				catch (ClassNotFoundException e) {
-				// handle exception
+					e.printStackTrace();
 				}
 				catch (InstantiationException e) {
-				// handle exception
+					e.printStackTrace();
 				}
 				catch (IllegalAccessException e) {
-				// handle exception
-				}*/
+					e.printStackTrace();
+				}
 				try {
 					MainWindow window = new MainWindow();
 					window.frame.setVisible(true);

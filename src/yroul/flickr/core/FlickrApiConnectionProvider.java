@@ -1,4 +1,4 @@
-package yroul.flickr;
+package yroul.flickr.core;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

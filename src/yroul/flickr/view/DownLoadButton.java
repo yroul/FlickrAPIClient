@@ -9,7 +9,7 @@ import javax.swing.JFileChooser;
 
 import org.apache.commons.io.FileUtils;
 
-import yroul.flickr.FlickrAPIClient;
+import yroul.flickr.core.FlickrAPIClient;
 
 /**
  * 
