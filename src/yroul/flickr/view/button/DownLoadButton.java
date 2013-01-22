@@ -1,10 +1,10 @@
 package yroul.flickr.view.button;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import org.apache.commons.io.FileUtils;
@@ -42,28 +42,33 @@ public class DownLoadButton extends AbstractCustomButton {
             
             
            
-			try {
+			
 				//Save file
 	            String picture = FlickrAPIClient.getImageURL("Original",imageId);
-				URL pictureURL = new URL(picture);
-				FileUtils.copyURLToFile(pictureURL, file);
-				
-			}catch(IllegalArgumentException e){
-				//fallback, try to get the large image
-				try {
-					//Save file
-		            String picture = FlickrAPIClient.getImageURL("Large",imageId);
-					URL pictureURL = new URL(picture);
-					FileUtils.copyURLToFile(pictureURL, file);
+	            if (picture == null){
+	            	picture = FlickrAPIClient.getImageURL("Large",imageId);
+	            }
+	            
+	            if(picture == null){
+	            	throw new IllegalArgumentException("Téléchargement de l'image impossible");
+	            }else{
+	            	URL pictureURL;
+					try {
+						pictureURL = new URL(picture);
+						FileUtils.copyURLToFile(pictureURL, file);
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+	            }
+	            
 				
-			}
-			catch (Exception e1) {
-				e1.printStackTrace();
-			}
+				
+			
         } else {
            System.out.println("error");
         }

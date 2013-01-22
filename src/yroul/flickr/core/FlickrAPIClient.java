@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 /**
  * 
  * @author yroul
@@ -22,6 +21,7 @@ import org.json.simple.parser.ParseException;
 public  class FlickrAPIClient {
 
 	private static String apiKey = "de7a49a6d554b0e216dfcf2976635605";
+	public static String photosPerPage = "30";
 	
 	/**
 	 *  Search photos by keywords
@@ -35,7 +35,7 @@ public  class FlickrAPIClient {
 		arguments.put("tags",keywords);
 		arguments.put("sort","relevance");
 		//return only 30 image 
-		arguments.put("per_page","30");
+		arguments.put("per_page",photosPerPage);
 		String response = provider.sendRequest("flickr.photos.search", arguments);
 		response = response.substring(0, response.length()-1);
 		response = response.substring(9);
@@ -89,6 +89,7 @@ public  class FlickrAPIClient {
 			e.printStackTrace();
 		}
 		return toReturn;
+		
 		
 		
 		

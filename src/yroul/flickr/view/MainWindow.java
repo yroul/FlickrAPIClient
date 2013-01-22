@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -18,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 
@@ -44,11 +47,14 @@ public class MainWindow implements ActionListener,MouseListener  {
 	private JPanel downLoadPanel;
 	private DownLoadButton downloadButton;
 	private JPanel picturePanel;
+	private final static Logger LOGGER = Logger.getLogger(MainWindow.class.getName());
+	private JProgressBar progressBar;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		LOGGER.setLevel(Level.INFO);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -112,6 +118,12 @@ public class MainWindow implements ActionListener,MouseListener  {
 		btnSearch.addActionListener(this);
 		northPanel.add(btnSearch);
 		
+		progressBar = new JProgressBar(0,Integer.parseInt(FlickrAPIClient.photosPerPage));
+		progressBar.setValue(0);
+		progressBar.setStringPainted(true);
+		progressBar.setVisible(false);
+		northPanel.add(progressBar);
+		
 		
 		
 		mainPanel = new JPanel();
@@ -172,24 +184,40 @@ public class MainWindow implements ActionListener,MouseListener  {
 	 * Start search in flickr api
 	 */
 	private void search(){
-		
-		String keywords = this.txtSearch.getText();
-		if(!(keywords.isEmpty())){
-			//remove old images
-			mainPanel.removeAll();
-			PhotoSet photoSet = FlickrAPIClient.searchPhotos(keywords);
-			for(Photo p : photoSet.getPhoto()){
-				ImageLabel imagePanel = new ImageLabel(FlickrAPIClient.getImageURL("Square",p.getId()),p.getId());
-				imagePanel.addMouseListener(this);
-				mainPanel.add(imagePanel);
+		progressBar.setVisible(true);
+		progressBar.setValue(0);
+		Thread t = new Thread(new Runnable() {
 			
+			@Override
+			public void run() {
+				
+				String keywords = MainWindow.this.txtSearch.getText();
+				if(!(keywords.isEmpty())){
+					//remove old images
+					mainPanel.removeAll();
+					PhotoSet photoSet = FlickrAPIClient.searchPhotos(keywords);
+					LOGGER.info("PhotoSet recu");
+					int i=1;
+					for(Photo p : photoSet.getPhoto()){
+						ImageLabel imagePanel = new ImageLabel(FlickrAPIClient.getImageURL("Square",p.getId()),p.getId());
+						imagePanel.addMouseListener(MainWindow.this);
+						mainPanel.add(imagePanel);
+						LOGGER.info("Photos "+i+"/"+FlickrAPIClient.photosPerPage);
+						i++;
+						northPanel.revalidate();
+						northPanel.repaint();
+						mainPanel.revalidate();
+						mainPanel.repaint();
+						MainWindow.this.progressBar.setValue(MainWindow.this.progressBar.getValue()+1);
+					
+					}
+					
+					
+				}
 			}
-			northPanel.revalidate();
-			northPanel.repaint();
-			mainPanel.revalidate();
-			mainPanel.repaint();
 			
-		}
+		});
+		t.start();
 		
 	}
 	/**
