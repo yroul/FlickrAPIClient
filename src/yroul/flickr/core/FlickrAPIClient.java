@@ -82,9 +82,6 @@ public  class FlickrAPIClient {
 				}
 				
 			}
-			if (toReturn == null){
-				throw new IllegalArgumentException("Sorry, the size "+imageSize+" does not exist.");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

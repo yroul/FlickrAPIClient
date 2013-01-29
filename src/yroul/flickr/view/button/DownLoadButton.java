@@ -50,7 +50,7 @@ public class DownLoadButton extends AbstractCustomButton {
 	            }
 	            
 	            if(picture == null){
-	            	throw new IllegalArgumentException("Téléchargement de l'image impossible");
+	            	throw new IllegalArgumentException("TÃ©lÃ©chargement de l'image impossible");
 	            }else{
 	            	URL pictureURL;
 					try {

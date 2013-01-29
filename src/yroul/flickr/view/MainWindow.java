@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.logging.Level;
@@ -36,7 +38,7 @@ import yroul.flickr.view.label.CustomLabel;
  * Main window of the applciation
  *
  */
-public class MainWindow implements ActionListener,MouseListener  {
+public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 
 	private JFrame frame;
 	private JTextField txtSearch;
@@ -111,6 +113,7 @@ public class MainWindow implements ActionListener,MouseListener  {
 		northPanel.add(flickrLogo);
 		
 		txtSearch = new JTextField();
+		txtSearch.addKeyListener(this);
 		northPanel.add(txtSearch);
 		txtSearch.setColumns(10);
 		
@@ -246,6 +249,26 @@ public class MainWindow implements ActionListener,MouseListener  {
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if( e.getKeyCode() == KeyEvent.VK_ENTER){
+			search();
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

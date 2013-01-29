@@ -1,10 +1,12 @@
 package yroul.flickr.view;
 
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +39,16 @@ public class ImageLabel extends JLabel implements ActionListener {
             this.imageId = id;
          } catch (Exception e) {
         	 
-        	 LOGGER.severe("Erreur lros de la lecture de l'image : "+fileURL);
-        	 
+        	
+        	 try {
+				image = ImageIO.read(getClass().getClassLoader().getResource("images/placeHolder.jpg"));
+				this.setIcon(new ImageIcon(image));
+				LOGGER.info("Place holder correctement ajouté");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				//e1.printStackTrace();
+				LOGGER.severe("Erreur lors de la lecture de l'image : "+fileURL);
+			}
          }
         
     }
