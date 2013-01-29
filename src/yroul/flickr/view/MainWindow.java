@@ -210,6 +210,7 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 				
 				String keywords = toSearch;
 				if(!(keywords.isEmpty())){
+					MainWindow.this.btnSearch.setEnabled(false);
 					//remove old images
 					mainPanel.removeAll();
 					PhotoSet photoSet = FlickrAPIClient.searchPhotos(keywords);
@@ -228,13 +229,15 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 						MainWindow.this.progressBar.setValue(MainWindow.this.progressBar.getValue()+1);
 					
 					}
-					
+					MainWindow.this.btnSearch.setEnabled(true);
+					MainWindow.this.progressBar.setVisible(false);
 					
 				}
 			}
 			
 		});
 		t.start();
+		
 		
 	}
 	/**
