@@ -51,11 +51,19 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 	private JPanel picturePanel;
 	private final static Logger LOGGER = Logger.getLogger(MainWindow.class.getName());
 	private JProgressBar progressBar;
-
+	private static String keywords;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		String toSearch;
+		try{
+			toSearch = args[0];
+		}catch(Exception e){
+			toSearch = null;
+		}
+		keywords = toSearch;
+		
 		LOGGER.setLevel(Level.INFO);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -145,6 +153,12 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 		
 		picturePanel = new JPanel();
 		eastPanel.add(picturePanel, BorderLayout.CENTER);
+		
+		if(keywords != null){
+			txtSearch.setText(keywords);
+			search(keywords);
+		}
+		
 	}
 
 	@Override
@@ -152,7 +166,7 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 		
 		//button search click
 		if(e.getSource().equals(btnSearch)){
-			search();
+			search(this.txtSearch.getText());
 		}
 		//button download click
 		if(e.getSource() == downloadButton){
@@ -186,7 +200,7 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 	/**
 	 * Start search in flickr api
 	 */
-	private void search(){
+	private void search(final String toSearch){
 		progressBar.setVisible(true);
 		progressBar.setValue(0);
 		Thread t = new Thread(new Runnable() {
@@ -194,7 +208,7 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 			@Override
 			public void run() {
 				
-				String keywords = MainWindow.this.txtSearch.getText();
+				String keywords = toSearch;
 				if(!(keywords.isEmpty())){
 					//remove old images
 					mainPanel.removeAll();
@@ -256,7 +270,7 @@ public class MainWindow implements ActionListener,MouseListener,KeyListener  {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if( e.getKeyCode() == KeyEvent.VK_ENTER){
-			search();
+			search(MainWindow.this.txtSearch.getText());
 		}
 		
 	}
