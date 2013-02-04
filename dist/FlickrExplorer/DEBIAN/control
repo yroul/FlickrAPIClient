@@ -1,0 +1,9 @@
+Package: FlickrExplorer
+Version: 1.0
+Section: web
+Priority: optional
+Architecture: all
+Depends: bash
+Maintainer:  Yoan Roullard <yoan.roullard@gmail.com>
+Description: FlickrExplorer, a java written explorer for Flickr pictures
+
